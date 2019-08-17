@@ -1,0 +1,33 @@
+{% extends "server/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <div class="content-section">
+          <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                        <legend class="border-bottom b-4">User Managment</legend>
+                        {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">List Users and Groups</button>
+                </div>
+          </form>
+        </div>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">Users</a></h2>
+            <p class="article-content">
+	        {{ users }}
+            </p>
+          </div>
+        </article>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">Groups</a></h2>
+            <p class="article-content">
+                {{ group }}
+            </p>
+          </div>
+        </article>
+
+{% endblock content %}

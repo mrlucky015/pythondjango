@@ -1,0 +1,57 @@
+{% extends "server/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <div class="content-section">
+          <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                        <legend class="border-bottom b-4">Monitor Linux Server</legend>
+                        {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Submit</button>
+                </div>
+          </form>
+        </div>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">Date</a></h2>
+            <p class="article-content">
+	        {{ date }}
+            </p>
+          </div>
+        </article>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">Uptime</a></h2>
+            <p class="article-content">
+		{{ uptime }}
+	    </p>
+          </div>
+        </article>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">VM Statistics</a></h2>
+            <p class="article-content">
+		{{ vmstat }}
+	    </p>
+          </div>
+        </article>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">File Systems</a></h2>
+            <p class="article-content">
+		{{ filesystem }}
+            </p>
+          </div>
+        </article>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">Memory</a></h2>
+            <p class="article-content">
+		{{ memory }}
+	    </p>
+          </div>
+        </article>
+
+{% endblock content %}
