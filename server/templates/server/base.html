@@ -32,10 +32,10 @@
 		{% else %}
 		  <a class="nav-item nav-link" href="{% url 'server-monitor' %}">Monitor Servers</a>
 		  <a class="nav-item nav-link" href="{% url 'server-users' %}">Users</a>
-		  <a class="nav-item nav-link" href="#">Packages</a>
-		  <a class="nav-item nav-link" href="#">New FileSystems</a>
+		  <a class="nav-item nav-link" href="{% url 'server-packages' %}">Packages</a>
 		  <a class="nav-item nav-link" href="#">FileSystems</a>
-		  <a class="nav-item nav-link" href="#">Services</a>
+                  <a class="nav-item nav-link" href="{% url 'server-services' %}">Services</a>
+		  <a class="nav-item nav-link" href="{% url 'server-commands' %}">Run Command</a>
 		{% endif %}
               </div>
               <!-- Navbar Right Side -->

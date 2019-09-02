@@ -5,30 +5,20 @@
           <form method="POST">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                        <legend class="border-bottom b-4">User Managment</legend>
+                        <legend class="border-bottom b-4">Services</legend>
                         {{ form|crispy }}
                 </fieldset>
                 <div class="form-group">
-                        <button class="btn btn-outline-info" type="submit">List Users and Groups</button>
+                        <button class="btn btn-outline-info" type="submit">Service Status</button>
                 </div>
           </form>
         </div>
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Users</a></h2>
+            <h2><a class="article-title">Service Status</a></h2>
             <p class="article-content">
             <pre>
-	        {{ users }}
-            </pre>
-            </p>
-          </div>
-        </article>
-        <article class="media content-section">
-          <div class="media-body">
-            <h2><a class="article-title">Groups</a></h2>
-            <p class="article-content">
-            <pre>
-                {{ group }}
+	        {{ services }}
             </pre>
             </p>
           </div>
