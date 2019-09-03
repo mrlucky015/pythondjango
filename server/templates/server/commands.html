@@ -1,0 +1,29 @@
+{% extends "server/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <div class="content-section">
+          <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                        <legend class="border-bottom b-4">Run Command</legend>
+                        {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Run Command</button>
+                </div>
+          </form>
+        </div>
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">Command Output</a></h2>
+            <p class="article-content">
+            <pre>
+{% for ins in commands %}
+{{ ins }}
+{% endfor %}
+            </pre>
+            </p>
+          </div>
+        </article>
+
+{% endblock content %}
