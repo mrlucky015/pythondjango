@@ -58,10 +58,17 @@ def packages(request):
       user = form.cleaned_data.get('user')
       password = form.cleaned_data.get('password')
       listpackage = form.cleaned_data.get('listpackage')
+      Options = form.cleaned_data['Options']
+      try:
+          Options = dict(form.fields['Options'].choices)[Options]
+      except KeyError:
+          pass
+      if Options == "List":
+          command3 = ['rpm -qa --last | head']
+      elif Options == "Install":
+          command3 = ['echo "Installing Package"', 'rpm -qa --last | tail']
       if listpackage:
           command3 = ['yum info ' + listpackage]
-      else:
-          command3 = ['rpm -qa --last | head']
       packages = sshconnection(servername, user, password, command3)
       return render(request, 'server/packages.html', {
             'packages': packages[0],
