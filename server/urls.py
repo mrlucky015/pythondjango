@@ -9,5 +9,6 @@ urlpatterns = [
     path('packages/', views.packages, name='server-packages'),
     path('services/', views.services, name='server-services'),
     path('commands/', views.commands, name='server-commands'),
+    path('filesystems/', views.filesystems, name='server-filesystems'),
 ]
 

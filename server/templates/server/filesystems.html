@@ -1,0 +1,45 @@
+{% extends "server/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <div class="content-section">
+          <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                        <legend class="border-bottom b-4">File Systems</legend>
+                        {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Submit</button>
+                </div>
+          </form>
+        </div>
+        <article class="media content-section">
+         <p class="article-content">
+            <pre>
+File Systems is used to display file systems available on servers
+File Systems is also used to create New file systems on servers
+
+Please use below Options for Demo:
+    Server name: localhost
+    User name: demouser
+    New File System: Provide ":" Delimited values to create file system
+    DiskName:ParititionName:PhysicalVolume:VolumeGroup:LogicalVolume:Type:Size:MountPoint
+            </pre>
+            </p>
+        </article>
+        {% if filesystemoutput %} 
+        <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">Execution Output</a></h2>
+            <p class="article-content">
+            <pre>
+{% for ins in filesystemoutput %}
+{{ ins }}
+{% endfor %}
+            </pre>
+            </p>
+          </div>
+        </article>
+        {% endif %}
+
+{% endblock content %}

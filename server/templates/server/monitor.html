@@ -13,6 +13,37 @@
                 </div>
           </form>
         </div>
+         <article class="media content-section">
+         <p class="article-content">
+            <pre>
+Monitor Servers is used to obtain basic information from servers
+
+Example:
+    Date
+    Uptime
+    VM Statistics
+    File Systems
+    Memory
+
+Please use below Options for Demo:
+    Server name: localhost
+    User name: demouser
+            </pre>
+            </p>
+        </article>
+        {% if error %}
+          <article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title">Error</a></h2>
+            <p class="article-content">
+            <pre>
+<strong>{{ error }}</strong>
+            </pre>
+            </p>
+          </div>
+        </article>
+        {% endif %}
+        {% if date %}
         <article class="media content-section">
           <div class="media-body">
             <h2><a class="article-title">Date</a></h2>
@@ -63,5 +94,5 @@
 	    </p>
           </div>
         </article>
-
+        {% endif %}
 {% endblock content %}

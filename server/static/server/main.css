@@ -86,6 +86,24 @@ a.article-title:hover {
   font-size: 2.5rem;
 }
 
-span.tab{
-  padding: 0 80px;
+
+.alert{  
+  float:left;
+  width:200px;
+  padding:20px 30px;
+  margin:30px;
+  text-align:center;
+  font-weight:bold;
+  cursor:pointer;
+  transition:background .5s;
+}
+
+#success{
+  background:#03a679;
+  color:#f0f0f0;  
+}
+
+#failure{
+  background:#ff3939;
+  color:#f0f0f0;  
 }
