@@ -13,6 +13,19 @@
                 </div>
           </form>
         </div>
+         <article class="media content-section">
+         <p class="article-content">
+            <pre>
+Run Command is used to run a command on server and provide output
+
+Please use below Options for Demo:
+    Server name: localhost
+    User name: demouser
+    Enter Command: Provide command which needs to executed on server in "," separated values
+            </pre>
+            </p>
+        </article>
+        {% if commands %}
         <article class="media content-section">
           <div class="media-body">
             <h2><a class="article-title">Command Output</a></h2>
@@ -25,5 +38,5 @@
             </p>
           </div>
         </article>
-
+        {% endif %}
 {% endblock content %}

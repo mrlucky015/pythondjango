@@ -13,6 +13,21 @@
                 </div>
           </form>
         </div>
+         <article class="media content-section">
+         <p class="article-content">
+            <pre>
+Packages is used to list available packages on servers and also list specific package information
+Packages also installs package on server
+
+Please use below Options for Demo:
+    Server name: localhost
+    User name: demouser
+    Show Package Info: Provide package name for which information should be displayed
+    Install Package: Provide package name which needs to be installed on server
+            </pre>
+            </p>
+        </article>
+        {% if packages %}
         <article class="media content-section">
           <div class="media-body">
             <h2><a class="article-title">Packages installed</a></h2>
@@ -23,5 +38,5 @@
             </p>
           </div>
         </article>
-
+        {% endif %}
 {% endblock content %}

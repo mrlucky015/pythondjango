@@ -13,6 +13,20 @@
                 </div>
           </form>
         </div>
+         <article class="media content-section">
+         <p class="article-content">
+            <pre>
+Users is used to obtain available users and groups on servers
+
+Please use below Options for Demo:
+    Server name: localhost
+    User name: demouser
+    Add user: provide values in ":" delimited
+              username:x:uid:gid:gecos:homedirectory:shell
+            </pre>
+            </p>
+        </article>
+        {% if users %}
         <article class="media content-section">
           <div class="media-body">
             <h2><a class="article-title">Users</a></h2>
@@ -33,5 +47,5 @@
             </p>
           </div>
         </article>
-
+        {% endif %}
 {% endblock content %}

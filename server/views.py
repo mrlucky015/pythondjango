@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .monitor import sshconnection
 from django.contrib.auth.decorators import login_required
-from .serverform import ServerForm, UserForm, PackageForm, ServiceForm, CommandForm
+from .serverform import ServerForm, UserForm, PackageForm, ServiceForm, CommandForm, FileSystemForm
+from .Base import *
+from django.contrib import messages
 # Create your views here.
 
 
@@ -11,6 +12,7 @@ def about(request):
    'title': 'About'
   }
   return render(request, 'server/about.html', context)
+
 def monitorserver(request):
   if request.method == 'POST':
     form = ServerForm(request.POST)
@@ -19,7 +21,12 @@ def monitorserver(request):
       user = form.cleaned_data.get('user')
       password = form.cleaned_data.get('password')
       command = ['date', 'uptime', 'vmstat', 'df -Ph', 'free -m']
-      result = sshconnection(servername, user, password, command)
+      result, rccode = sshconnection(servername, user, password, command)
+      if rccode == 0:
+          messages.success(request, f'Success')
+      else:
+          messages.warning(request, f'Failed')
+          return render(request, 'server/monitor.html', {'error': result[0], 'form': form})
       return render(request, 'server/monitor.html', {
             'date': result[0],
             'uptime': result[1],
@@ -40,7 +47,11 @@ def users(request):
       user = form.cleaned_data.get('user')
       password = form.cleaned_data.get('password')
       command2 = ['cat /etc/passwd | awk -F ":" \'{if($3 >= 1000) print $1}\'', 'cat /etc/group | awk -F ":" \'{if($3 >= 1000) print $1}\'']
-      users = sshconnection(servername, user, password, command2)
+      users, rccode = sshconnection(servername, user, password, command2)
+      if rccode == 0:
+          messages.success(request, f'Success')
+      else:
+          messages.warning(request, f'Failed')
       return render(request, 'server/users.html', {
             'users': users[0],
 	    'group': users[1],
@@ -65,11 +76,20 @@ def packages(request):
           pass
       if Options == "List":
           command3 = ['rpm -qa --last | head']
+          packages, rccode = sshconnection(servername, user, password, command3)
       elif Options == "Install":
           command3 = ['echo "Installing Package"', 'rpm -qa --last | tail']
-      if listpackage:
+          packages, rccode = sshconnection(servername, user, password, command3)
+      elif listpackage:
           command3 = ['yum info ' + listpackage]
-      packages = sshconnection(servername, user, password, command3)
+          packages, rccode = sshconnection(servername, user, password, command3)
+      else:
+          packages = ["Please select correct option or provide package name"]    
+          rccode = 1
+      if rccode == 0:
+          messages.success(request, f'Success')
+      else:
+          messages.warning(request, f'Failed')
       return render(request, 'server/packages.html', {
             'packages': packages[0],
             'form': form
@@ -85,10 +105,21 @@ def services(request):
       servername = form.cleaned_data.get('server')
       user = form.cleaned_data.get('user')
       password = form.cleaned_data.get('password')
-      options = form.cleaned_data.get('Options')
-      if options:
-          command4 = ['service ' +options+' status']
-          services = sshconnection(servername, user, password, command4)
+      servicename = form.cleaned_data.get('servicename')
+      Options = form.cleaned_data['Options']
+      try:
+          Options = dict(form.fields['Options'].choices)[Options]
+      except KeyError:
+          pass
+      if servicename:
+          command4 = []
+          command4.append("service {0} {1}".format(servicename, Options.lower()))
+          services, rccode = sshconnection(servername, user, password, command4)
+      if rccode == 0:
+          messages.success(request, f'Success')
+      else:
+          messages.warning(request, f'Failed')
+      #services = "service {0} {1}".format(servicename, Options)
       return render(request, 'server/services.html', {
             'services': services[0],
             'form': form
@@ -108,9 +139,14 @@ def commands(request):
       command = form.cleaned_data.get('command')
       if command:
           command5 = command.split(",")
-          commands = sshconnection(servername, user, password, command5)
+          commands, rccode = sshconnection(servername, user, password, command5)
       else:
-          commands = ['Please Enter Command']
+          messages.info(request, f'Empty Command provided')
+          commands = ['Please provide valid Command']
+      if rccode == 0:
+          messages.success(request, f'Success')
+      else:
+          messages.warning(request, f'Failed')
       return render(request, 'server/commands.html', {
             'commands': commands[:],
             'form': form
@@ -118,4 +154,47 @@ def commands(request):
   else:
       form = CommandForm()
   return render(request, 'server/commands.html', {'form': form})
+
+def filesystems(request):
+  if request.method == 'POST':
+    form = FileSystemForm(request.POST)
+    if form.is_valid():
+      servername = form.cleaned_data.get('server')
+      user = form.cleaned_data.get('user')
+      password = form.cleaned_data.get('password')
+      fileoptions = form.cleaned_data.get('fileoptions')
+      Options = form.cleaned_data['Options']
+      try:
+          Options = dict(form.fields['Options'].choices)[Options]
+      except KeyError:
+          pass
+      if fileoptions:
+          if Options == "Delete":
+              filesystemoutput, rccode = removeFS(servername, user, password, fileoptions)
+          else:
+              try:
+                  fileoptions = fileoptions.split(":")
+                  filesystemoutput, rccode = filesystem(device=fileoptions[0], partition=fileoptions[1], \
+pv=fileoptions[2], vg=fileoptions[3], lv=fileoptions[4], fstype=fileoptions[5],\
+ size=fileoptions[6], mountpoint=fileoptions[7])
+              except Exception as err:
+                  filesystemoutput = ['File System details are not provided in below format',\
+'DeviceName:PartitionName:PVName:VGName:LVName:FSType:Size:MountPoindt', err]
+                  rccode = 1
+      else:
+          filesystemoutput = ['File Systems details are not provided in below format',\
+'DeviceName:PartitionName:PVName:VGName:LVName:FSType:Size:MountPoinst']
+          rccode = 1
+      if rccode == 0:
+          messages.success(request, f'Success')
+      else:
+          messages.warning(request, f'Failed')
+      return render(request, 'server/filesystems.html', {
+            'filesystemoutput': filesystemoutput[:],
+            'form': form
+            })
+  else:
+      form = FileSystemForm()
+  return render(request, 'server/filesystems.html', {'form': form})
+
 
