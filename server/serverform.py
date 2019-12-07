@@ -38,7 +38,7 @@ class CommandForm(ServerForm):
 
 class FileSystemForm(ServerForm):
   fileoptions = forms.CharField(label='Enter FS parameters in ":" Separated form,Please use  \
-xvdb:xvdb1:xvdb1:testvg:testlv:xfs:8G:/test for testing', max_length=60, required=True)
+xvdg:xvdg1:xvdg1:testvg:testlv:xfs:8G:/test for testing', max_length=60, required=True)
   Options = forms.ChoiceField(widget=forms.RadioSelect, choices = [('Delete', 'Delete')], required=False)
   class Meta:
     fields = ['server', 'user', 'password', 'fileoptions']

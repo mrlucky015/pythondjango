@@ -109,7 +109,7 @@ def sshconnection(servername, user, password, command):
   commandoutput = []
   try:
      ssh.connect(servername, username=user)
-  except Exception:
+  except Exception as err:
      commandoutput.append("Please provide valid Server Name or Valid UserName")
      rccode = 1
      return commandoutput, rccode
@@ -204,10 +204,11 @@ size=kwargs['size'], mountpoint=kwargs['mountpoint'])
 def removeCommand(server, user, password, commands, executionoutput):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    executionoutput = []
     try:
         ssh.connect(server, username=user)
     except Exception:
-        commandoutput.append("Please provide valid Server Name or Valid UserName")
+        executionoutput.append("Please provide valid Server Name or Valid UserName")
         rccode = 1
         return executionoutput, rccode
     for check, command in commands.items():
@@ -237,8 +238,8 @@ def removeFS(servername, user, password, command):
     executecommand.update(unmountFS='umount /test')
     executecommand.update(removeLV='echo "y"| sudo lvremove /dev/mapper/testvg/testlv')
     executecommand.update(removeVG='vgremove testvg')
-    executecommand.update(removePV='pvremove /dev/xvdb1')
-    executecommand.update(removePartition=r'echo -e "d\nw" |sudo fdisk /dev/xvdb')
+    executecommand.update(removePV='pvremove /dev/xvdg1')
+    executecommand.update(removePartition=r'echo -e "d\nw" |sudo fdisk /dev/xvdg')
     executionoutput, rccode = removeCommand(servername, user, password , executecommand, executionoutput)
     return executionoutput, rccode
 

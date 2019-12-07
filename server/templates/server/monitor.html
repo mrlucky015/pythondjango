@@ -15,27 +15,24 @@
         </div>
          <article class="media content-section">
          <p class="article-content">
-            <pre>
-Monitor Servers is used to obtain basic information from servers
+         <strong>Monitor Servers is used to obtain basic information from servers</strong>
+         Example:
+         &emsp;  Date
+         &emsp;  Uptime
+         &emsp;  VM Statistics
+         &emsp;  File Systems
+         &emsp;  Memory
 
-Example:
-    Date
-    Uptime
-    VM Statistics
-    File Systems
-    Memory
-
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-            </pre>
-            </p>
+         Please use below Options for Demo:
+         &emsp;  Server name: localhost
+         &emsp;  User name: demouser
+         </p>
         </article>
         {% if error %}
           <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Error</a></h2>
             <p class="article-content">
+            <font color=#800000><strong>Failed</strong><font>
             <pre>
 <strong>{{ error }}</strong>
             </pre>
@@ -46,8 +43,8 @@ Please use below Options for Demo:
         {% if date %}
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Date</a></h2>
             <p class="article-content">
+            <font color=#006400><strong>Date</strong></font>
             <pre>
 {{ date }}
             </pre>
@@ -56,8 +53,8 @@ Please use below Options for Demo:
         </article>
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Uptime</a></h2>
             <p class="article-content">
+            <font color=#006400><strong>Uptime</strong></font>
             <pre>
 {{ uptime }}
             </pre>
@@ -66,8 +63,8 @@ Please use below Options for Demo:
         </article>
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">VM Statistics</a></h2>
             <p class="article-content">
+            <font color=#006400><strong>VM Statistics</strong></font>
             <pre>
 {{ vmstat }}
             </pre>
@@ -76,8 +73,8 @@ Please use below Options for Demo:
         </article>
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">File Systems</a></h2>
             <p class="article-content">
+            <font color=#006400><strong>File Systems</strong></font>
             <pre>
 {{ filesystem }}
             </pre>
@@ -86,8 +83,8 @@ Please use below Options for Demo:
         </article>
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Memory</a></h2>
             <p class="article-content">
+            <font color=#006400><strong>Memory</strong></font>
             <pre>
 {{ memory }}
             </pre>

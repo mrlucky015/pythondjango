@@ -52,6 +52,7 @@ def users(request):
           messages.success(request, f'Success')
       else:
           messages.warning(request, f'Failed')
+          return render(request, 'server/users.html', {'error': users[0], 'form': form}) 
       return render(request, 'server/users.html', {
             'users': users[0],
 	    'group': users[1],
@@ -90,6 +91,7 @@ def packages(request):
           messages.success(request, f'Success')
       else:
           messages.warning(request, f'Failed')
+          return render(request, 'server/packages.html', {'error': packages[0],'form': form})
       return render(request, 'server/packages.html', {
             'packages': packages[0],
             'form': form
@@ -119,7 +121,7 @@ def services(request):
           messages.success(request, f'Success')
       else:
           messages.warning(request, f'Failed')
-      #services = "service {0} {1}".format(servicename, Options)
+          return render(request, 'server/services.html', {'error': services[0],'form': form})
       return render(request, 'server/services.html', {
             'services': services[0],
             'form': form
@@ -137,16 +139,18 @@ def commands(request):
       user = form.cleaned_data.get('user')
       password = form.cleaned_data.get('password')
       command = form.cleaned_data.get('command')
-      if command:
+      if command and 'shutdown' not in command and 'poweroff' not in command and 'halt' not in command\
+and 'init' not in command:
           command5 = command.split(",")
           commands, rccode = sshconnection(servername, user, password, command5)
       else:
-          messages.info(request, f'Empty Command provided')
-          commands = ['Please provide valid Command']
+          commands = ['Server power commands are disabled']
+          rccode = 1
       if rccode == 0:
           messages.success(request, f'Success')
       else:
           messages.warning(request, f'Failed')
+          return render(request, 'server/commands.html', {'error': commands[0], 'form': form})
       return render(request, 'server/commands.html', {
             'commands': commands[:],
             'form': form
@@ -189,6 +193,7 @@ pv=fileoptions[2], vg=fileoptions[3], lv=fileoptions[4], fstype=fileoptions[5],\
           messages.success(request, f'Success')
       else:
           messages.warning(request, f'Failed')
+          return render(request, 'server/filesystems.html', {'error': filesystemoutput,'form': form})
       return render(request, 'server/filesystems.html', {
             'filesystemoutput': filesystemoutput[:],
             'form': form

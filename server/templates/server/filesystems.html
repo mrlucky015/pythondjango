@@ -15,22 +15,35 @@
         </div>
         <article class="media content-section">
          <p class="article-content">
-            <pre>
-File Systems is used to display file systems available on servers
-File Systems is also used to create New file systems on servers
+         <strong>File Systems is used to display file systems available on servers
+         File Systems is also used to create New file systems on servers</strong>
 
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-    New File System: Provide ":" Delimited values to create file system
-    DiskName:ParititionName:PhysicalVolume:VolumeGroup:LogicalVolume:Type:Size:MountPoint
+         Please use below Options for Demo:
+         &emsp; Server name: localhost
+         &emsp; User name: demouser
+         &emsp; New File System: Provide ":" Delimited values to create file system
+         &emsp; &emsp; DiskName:ParititionName:PhysicalVolume:VolumeGroup:LogicalVolume:Type:Size:MountPoint
+         </p>
+        </article>
+        {% if error %}
+          <article class="media content-section">
+          <div class="media-body">
+            <p class="article-content">
+            <font color=#800000><strong>Failed</strong><font>
+            <pre>
+            {% for errors in error %}
+               <strong>{{ errors }}</strong>
+            {% endfor %}
             </pre>
             </p>
-        </article>
+          </div>
+        {% endif %}
         {% if filesystemoutput %} 
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Execution Output</a></h2>
+            <p class="article-content">
+            <font color=#006400 ><strong>Execution Output</strong><font>
+            </p>
             <p class="article-content">
             <pre>
 {% for ins in filesystemoutput %}
