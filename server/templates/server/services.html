@@ -15,20 +15,32 @@
         </div>
          <article class="media content-section">
          <p class="article-content">
-            <pre>
-Services is used to Start/Stop/Restart or provide status of server.
+         <strong>Services is used to Start/Stop/Restart or provide status of server.</strong>
 
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-    Server Name: provide service name Ex:sshd
-            </pre>
+         Please use below Options for Demo:
+         &emsp; Server name: localhost
+         &emsp; User name: demouser
+         &emsp; Service Name: provide service name
+         &emsp; &emsp; Ex:sshd
             </p>
         </article>
+        {% if error %}
+          <article class="media content-section">
+          <div class="media-body">
+            <p class="article-content">
+            <font color=#800000><strong>Failed</strong><font>
+            <pre>
+<strong>{{ error }}</strong>
+            </pre>
+            </p>
+          </div>
+        {% endif %}
         {% if services %}
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Service Status</a></h2>
+            <p class="article-content">
+            <font color=#006400><strong>Execution Output</strong><font>
+            </p>
             <p class="article-content">
             <pre>
 {{ services }}

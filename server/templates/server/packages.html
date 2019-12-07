@@ -27,11 +27,22 @@ Please use below Options for Demo:
             </pre>
             </p>
         </article>
+        {% if error %}
+          <article class="media content-section">
+          <div class="media-body">
+            <p class="article-content">
+            <font color=#800000><strong>Failed</strong><font>
+            <pre>
+<strong>{{ error }}</strong>
+            </pre>
+            </p>
+          </div>
+        {% endif %}
         {% if packages %}
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Packages installed</a></h2>
             <p class="article-content">
+            <font color=#006400><strong>Execution Output</strong></font>
             <pre>
 {{ packages }}
             </pre>

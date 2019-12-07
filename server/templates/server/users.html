@@ -15,22 +15,31 @@
         </div>
          <article class="media content-section">
          <p class="article-content">
-            <pre>
-Users is used to obtain available users and groups on servers
+         <strong>Users is used to obtain available users and groups on servers</strong>
 
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-    Add user: provide values in ":" delimited
-              username:x:uid:gid:gecos:homedirectory:shell
+         Please use below Options for Demo:
+         &emsp;  Server name: localhost
+         &emsp;  User name: demouser
+         &emsp;  Add user: provide values in ":" delimited
+         &emsp;  &emsp;  username:x:uid:gid:gecos:homedirectory:shell
+         </p>
+        </article>
+        {% if error %}
+          <article class="media content-section">
+          <div class="media-body">
+            <p class="article-content">
+            <font color=#800000><strong>Failed</strong><font>
+            <pre>
+<strong>{{ error }}</strong>
             </pre>
             </p>
-        </article>
+          </div>
+        {% endif %}
         {% if users %}
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Users</a></h2>
             <p class="article-content">
+            <font color=#006400><strong>Users</strong></font>
             <pre>
 {{ users }}
             </pre>
@@ -39,8 +48,8 @@ Please use below Options for Demo:
         </article>
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Groups</a></h2>
             <p class="article-content">
+            <font color=#006400><strong>Groups</strong></font>
             <pre>
 {{ group }}
             </pre>

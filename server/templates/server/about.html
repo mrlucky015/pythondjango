@@ -2,86 +2,79 @@
 {% block content %}
 	  <article class="media content-section">
   	    <div class="media-body">
-    	      <h2><a class="article-title">Manage Linux Servers using Webpages</a></h2>
-              <legend class="border-bottom b-4">Python-Django Project - WebSite is in Progress</legend>
+    	      <h2 ><a class="article-title">Manage Linux Servers using Webpage</a></h2>
+              <legend class="border-bottom b-4"><font color=#008080>Python-Django Project</font></legend>
     	      <p class="article-content">
               WebSite is designed to provide Linux Server Administration from a webpage on multiple Linux servers
-              <pre>
-Please use below Credentails to Login WebSite
-    Username: demouser
-    Password: test@123
-              </pre>
-              </p>
-              <legend class="border-bottom b-4">Monitor Servers</legend>
-              <p class="article-content">
-              Monitor Servers is used to obtain basic information from servers
-              <pre>
-Example:
-    Date
-    Uptime
-    VM Statistics
-    File Systems
-    Memory
 
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-              </pre>
+              Please use below Credentails to Login WebSite
+              &emsp;  Username: demouser
+              &emsp;  Password: test@123
               </p>
-              <legend class="border-bottom b-4">Users</legend>
+              <legend class="border-bottom b-4"><a class="mr-2" href="{% url 'server-monitor' %}">Monitor Servers</a></legend>
               <p class="article-content">
-              Users is used to obtain available users and groups on servers
-              <pre>
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-    Add user: provide values in ":" delimited
-              username:x:uid:gid:gecos:homedirectory:shell
-              </pre>
+              <strong>Monitor Servers is used to obtain basic information from servers</strong>
+              Example:
+              &emsp;  Date
+              &emsp;  Uptime
+              &emsp;  VM Statistics
+              &emsp;  File Systems
+              &emsp;  Memory
+
+              Please use below Options for Demo:
+              &emsp;  Server name: localhost
+              &emsp;  User name: demouser
               </p>
-              <legend class="border-bottom b-4">Packages</legend>
+              <legend class="border-bottom b-4"><a class="mr-2" href="{% url 'server-users' %}">Users</a></legend>
               <p class="article-content">
-              Packages is used to list available packages on servers and also list specific package information
-              Packages also installs package on server
-              <pre>
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-    Show Package Info: Provide package name for which information should be displayed
-    Install Package: Provide package name which needs to be installed on server
-              </pre>
+              <strong>Users is used to obtain available users and groups on servers</strong>
+
+              Please use below Options for Demo:
+              &emsp;  Server name: localhost
+              &emsp;  User name: demouser
+              &emsp;  Add user: provide values in ":" delimited
+              &emsp;  &emsp;  username:x:uid:gid:gecos:homedirectory:shell
               </p>
-              <legend class="border-bottom b-4">FileSystems</legend>
+              <legend class="border-bottom b-4"><a class="mr-2" href="{% url 'server-packages' %}">Packages</a></legend>
               <p class="article-content">
-              File Systems is used to display file systems available on servers
-              File Systems is also used to create New file systems on servers
-              <pre>
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-    New File System: Provide ":" Delimited values to create file system
-    DiskName:ParititionName:PhysicalVolume:VolumeGroup:LogicalVolume:Type:Size:MountPoint
-              </pre>
+              <strong>Packages is used to list available packages on servers and also list specific package information
+              Packages also installs package on server</strong>
+
+              Please use below Options for Demo:
+              &emsp; Server name: localhost
+              &emsp; User name: demouser
+              &emsp; Show Package Info: Provide package name for which information should be displayed
+              &emsp; Install Package: Provide package name which needs to be installed on server
               </p>
-              <legend class="border-bottom b-4">Services</legend>
+              <legend class="border-bottom b-4"><a class="mr-2" href="{% url 'server-filesystems' %}">FileSystems</a></legend>
               <p class="article-content">
-              Services is used to Start/Stop/Restart or provide status of server.
-              <pre>
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-    Server Name: provide service name Ex:sshd
-              </pre>
+              <strong>File Systems is used to display file systems available on servers
+              File Systems is also used to create New file systems on servers</strong>
+
+              Please use below Options for Demo:
+              &emsp; Server name: localhost
+              &emsp; User name: demouser
+              &emsp; New File System: Provide ":" Delimited values to create file system
+              &emsp; &emsp; DiskName:ParititionName:PhysicalVolume:VolumeGroup:LogicalVolume:Type:Size:MountPoint
               </p>
-              <legend class="border-bottom b-4">Run Command on Server</legend>
+              <legend class="border-bottom b-4"><a class="mr-2" href="{% url 'server-services' %}">Services</a></legend>
               <p class="article-content">
-              Run Command is used to run a command on server and provide output
-              <pre>
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-    Enter Command: Provide command which needs to executed on server in "," separated values
-              </pre>
+              <strong>Services is used to Start/Stop/Restart or provide status of server.</strong>
+
+              Please use below Options for Demo:
+              &emsp; Server name: localhost
+              &emsp; User name: demouser
+              &emsp; Service Name: provide service name 
+			  &emsp; &emsp; Ex:sshd
+              </p>
+              <legend class="border-bottom b-4"><a class="mr-2" href="{% url 'server-commands' %}">Run Command on Server</a></legend>
+              <p class="article-content">
+              <strong>Run Command is used to run a command on server and provide output</strong>
+
+              Please use below Options for Demo:
+              &emsp; Server name: localhost
+              &emsp; User name: demouser
+              &emsp; Enter Command: Provide command which needs to executed on server in "," separated values
               </p>
   	    </div>
 	  </article>

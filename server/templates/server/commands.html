@@ -15,20 +15,31 @@
         </div>
          <article class="media content-section">
          <p class="article-content">
-            <pre>
-Run Command is used to run a command on server and provide output
+              <strong>Run Command is used to run a command on server and provide output</strong>
 
-Please use below Options for Demo:
-    Server name: localhost
-    User name: demouser
-    Enter Command: Provide command which needs to executed on server in "," separated values
-            </pre>
+              Please use below Options for Demo:
+              &emsp; Server name: localhost
+              &emsp; User name: demouser
+              &emsp; Enter Command: Provide command which needs to executed on server in "," separated values
             </p>
         </article>
+        {% if error %}
+          <article class="media content-section">
+          <div class="media-body">
+            <p class="article-content">
+            <font color=#800000><strong>Failed</strong><font>
+            <pre>
+<strong>{{ error }}</strong>
+            </pre>
+            </p>
+          </div>
+        {% endif %}
         {% if commands %}
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title">Command Output</a></h2>
+            <p class="article-content">
+                <font color=##006400><strong>Execution Output</strong><font>
+            </p>
             <p class="article-content">
             <pre>
 {% for ins in commands %}
