@@ -120,6 +120,7 @@ def sshconnection(servername, user, password, command):
         commandoutput.append(stdout.read().strip().decode("utf-8"))
         rccode = 0
     else:
+        commandoutput.append(stderr.read().decode("utf-8"))
         rccode = 1
         break
   ssh.close

@@ -140,7 +140,7 @@ def commands(request):
       password = form.cleaned_data.get('password')
       command = form.cleaned_data.get('command')
       if command and 'shutdown' not in command and 'poweroff' not in command and 'halt' not in command\
-and 'init' not in command:
+and 'init' not in command and 'reboot' not in command:
           command5 = command.split(",")
           commands, rccode = sshconnection(servername, user, password, command5)
       else:
